@@ -8,7 +8,7 @@ services:
       target: development
     volumes:
       - ./server:/alar-users/src/app
-      - ./alar-users/src/app/node_modules
+      - /alar-users/src/app/node_modules
     command: npm run start:debug
     depends_on:
       - postgres
