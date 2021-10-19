@@ -4,14 +4,23 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
       ConfigModule.forRoot({ isGlobal: true }),
       TypeOrmModule.forRoot({
-        type: 'postgres',
-        url: process.env.DATABASE_URL,
+          type: 'postgres',
+          url: process.env.DATABASE_URL,
+          entities: [__dirname + '/**/*.entity{.ts,.js}'],
+          synchronize: false,
+          migrationsRun: true,
+          migrations: [__dirname + '/migrations/*{.ts,.js}'],
+          cli: {
+              migrationsDir: 'src/migrations',
+          },
       }),
+      UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
