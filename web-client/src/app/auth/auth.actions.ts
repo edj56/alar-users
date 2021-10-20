@@ -22,3 +22,8 @@ export class Register {
   static readonly type = '[Auth] Register';
   constructor(public payload: IRegisterRequest) {}
 }
+
+export class Logout {
+  static readonly type = '[Auth] Logout';
+  constructor() {}
+}

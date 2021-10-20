@@ -1,1 +1,11 @@
-<p>main works!</p>
+<ng-container *ngIf="auth$ | async as auth">
+  <ng-container *ngIf="!auth.isLoading && auth.isLoggedIn">
+    Hi! {{ auth.profile?.email }}
+  </ng-container>
+
+  <button (click)="logout()">Logout</button>
+
+  <router-outlet></router-outlet>
+</ng-container>
+
+

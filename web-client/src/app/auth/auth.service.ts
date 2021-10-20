@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 import { ILoginRequest, ILoginResponse } from './login/login.interfaces';
 import { IRegisterRequest } from './register/register.interfaces';
@@ -9,7 +10,7 @@ import { IProfile } from "./auth.interfaces";
 
 @Injectable()
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   login(data: ILoginRequest): Observable<ILoginResponse> {
     return this.http.post<ILoginResponse>('/api/auth/login', data)
@@ -24,5 +25,10 @@ export class AuthService {
 
   getMe(): Observable<IProfile> {
     return this.http.get<IProfile>('/api/profile');
+  }
+
+  logout(): Promise<boolean> {
+    localStorage.removeItem('alar.accessToken');
+    return this.router.navigate(['/auth/login']);
   }
 }
