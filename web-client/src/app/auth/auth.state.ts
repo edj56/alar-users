@@ -22,7 +22,6 @@ export class AuthState {
   @Action(Init)
   init({ patchState }: StateContext<AuthStateModel>) {
     patchState({ isLoading: true });
-    console.log('init');
     return this.authService.getMe().pipe(tap(
       (profile) => patchState({ isLoggedIn: true, profile }),
       () => patchState({ isLoggedIn: false, profile: undefined }),
