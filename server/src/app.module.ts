@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SnakeNamingStrategy } from 'typeorm-snake-naming-strategy';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,8 +21,10 @@ import { UsersModule } from './users/users.module';
           cli: {
               migrationsDir: 'src/migrations',
           },
+          namingStrategy: new SnakeNamingStrategy(),
       }),
       UsersModule,
+      AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

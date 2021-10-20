@@ -27,9 +27,9 @@ export class AddedUsersTable1634667455752 implements MigrationInterface {
                         isUnique: true,
                     },
                     {
-                        name: 'password_hash',
+                        name: 'password',
                         type: 'varchar',
-                        length: '64',
+                        length: '512',
                     },
                     {
                         name: 'first_name',
