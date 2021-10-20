@@ -1,9 +1,11 @@
-import {HttpException, Injectable} from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { UserEntity } from '../entities/user.entity';
 import { CreateUserDto } from '../dto/create-user.dto';
+import { IFilterEntities, IFilterResult } from '../../core/interfaces/filter.interface';
+import { filterEntitiesHelper } from '../../core/helpers/filter-entities.helper';
 
 @Injectable()
 export class UsersService {
@@ -35,8 +37,11 @@ export class UsersService {
         return this.usersRepo.findOne({ email }, { select: ['id', 'email', 'password'] });
     }
 
-    getAll(): Promise<UserEntity[]> {
-        // TODO: add pagination and query
-        return this.usersRepo.find();
+    getAll(filter: IFilterEntities): Promise<IFilterResult<UserEntity>> {
+        return filterEntitiesHelper<UserEntity>(
+            this.usersRepo,
+            filter,
+            ['email', 'username', 'firstName', 'lastName', 'city', 'country']
+        );
     }
 }
