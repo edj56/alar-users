@@ -24,8 +24,8 @@ export class SeedUsersCommand {
                 const user: Partial<UserEntity> = {
                     firstName: Faker.fake('{{name.firstName}}'),
                     lastName: Faker.fake('{{name.lastName}}'),
-                    username: Faker.fake('{{internet.userName}}'),
-                    email: Faker.fake('{{internet.email}}'),
+                    username: Faker.fake('{{internet.userName}}') + Faker.datatype.number({ min: 1, max: 1000 }),
+                    email: Faker.fake('{{internet.email}}') + Faker.datatype.number({ min: 1, max: 1000 }),
                     password: '12345',
                     birthDate: Faker.date.past().toISOString().substring(0, 10),
                     country: Faker.fake('{{address.country}}'),
