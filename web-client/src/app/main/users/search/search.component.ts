@@ -16,7 +16,7 @@ export class SearchComponent implements OnInit {
 
   filters: IFilterOptions = {
     page: 1,
-    perPage: 10,
+    perPage: 25,
     q: '',
   };
 

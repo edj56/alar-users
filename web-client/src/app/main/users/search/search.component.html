@@ -8,6 +8,12 @@
     />
   </div>
 
+  <app-pagination
+    *ngIf="users.pagination"
+    [options]="users.pagination"
+    (paginate)="onPaginate($event)"
+  ></app-pagination>
+
   <table>
     <thead>
       <tr>
@@ -38,11 +44,5 @@
       </tr>
     </tbody>
   </table>
-
-  <app-pagination
-    *ngIf="users.pagination"
-    [options]="users.pagination"
-    (paginate)="onPaginate($event)"
-  ></app-pagination>
 
 </ng-container>
