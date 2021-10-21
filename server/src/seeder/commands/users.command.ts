@@ -1,7 +1,6 @@
 import { INestApplicationContext } from '@nestjs/common';
-import { Repository } from 'typeorm';
 import { getRepositoryToken } from '@nestjs/typeorm';
-
+import { Repository } from 'typeorm';
 import * as Faker from 'faker';
 
 import { UserEntity } from '../../users/entities/user.entity';
