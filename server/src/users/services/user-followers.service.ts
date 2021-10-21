@@ -13,6 +13,10 @@ export class UserFollowersService {
     ) {}
 
     async create(followingId: number, followerId: number): Promise<UserFollowerEntity> {
+        if (followingId === followerId) {
+            throw new HttpException('You can\'t follow yourself!', 400);
+        }
+
         const count = await this.userFollowersRepo.count({ followingId, followerId });
 
         if (count > 0) {
