@@ -1,0 +1,8 @@
+<div>
+  <button
+    type="button"
+    *ngFor="let page of pages"
+    (click)="selectPage(page)"
+    [disabled]="page === options.page"
+  >{{ page }}</button>
+</div>

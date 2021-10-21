@@ -3,6 +3,8 @@
     Hi! {{ auth.profile?.email }}
   </ng-container>
 
+  <button routerLink="/users/search">Find User</button>
+  <button>My Favourites</button>
   <button (click)="logout()">Logout</button>
 
   <router-outlet></router-outlet>
