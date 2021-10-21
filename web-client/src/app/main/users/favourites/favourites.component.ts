@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+
+import { GetAllFollowings, UsersStateModel } from '../users.actions';
+import { UsersState } from '../users.state';
 
 @Component({
   selector: 'app-favourites',
@@ -6,10 +11,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./favourites.component.scss']
 })
 export class FavouritesComponent implements OnInit {
+  @Select(UsersState) users$!: Observable<UsersStateModel>;
 
-  constructor() { }
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
+    this.store.dispatch(new GetAllFollowings());
   }
 
 }

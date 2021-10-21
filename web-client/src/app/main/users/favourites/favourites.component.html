@@ -1,1 +1,35 @@
-<p>favourites works!</p>
+<ng-container *ngIf="users$ | async as users">
+  <h2>My Favourites</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Full Name</th>
+      <th>Gender</th>
+      <th>Birth Date</th>
+      <th>Age</th>
+      <th>Phone Number</th>
+      <th>City</th>
+      <th>Country</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users.followings">
+      <td>{{ user.id }}</td>
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.firstName }} {{ user.lastName }}</td>
+      <td>{{ user.gender }}</td>
+      <td>{{ user.birthDate | date: 'dd-MM-YYYY' }}</td>
+      <td>{{ user.age }}</td>
+      <td>{{ user.phoneNumber }}</td>
+      <td>{{ user.city }}</td>
+      <td>{{ user.country }}</td>
+    </tr>
+    </tbody>
+  </table>
+
+</ng-container>

@@ -1,8 +1,7 @@
 import { NestFactory } from '@nestjs/core';
-import { Logger } from '@nestjs/common';
 
 import { AppModule } from '../app.module';
-import {SeedUsersCommand} from "./commands/users.command";
+import { SeedUsersCommand } from './commands/users.command';
 
 function bootstrap() {
     NestFactory.createApplicationContext(AppModule)

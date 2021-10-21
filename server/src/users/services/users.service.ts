@@ -41,7 +41,7 @@ export class UsersService {
         return filterEntitiesHelper<UserEntity>(
             this.usersRepo,
             filter,
-            ['email', 'username', 'firstName', 'lastName', 'city', 'country']
+            ['email', 'username', 'firstName', 'lastName', 'city', 'country', 'phoneNumber']
         );
     }
 }

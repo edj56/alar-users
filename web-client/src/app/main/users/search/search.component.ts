@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
-import { GetAll, UsersStateModel } from '../users.actions';
+import {Follow, GetAll, UsersStateModel} from '../users.actions';
 import { UsersState } from '../users.state';
 import {IFilterOptions, IPaginationResult} from "../../../shared/models/filter.model";
 
@@ -37,5 +37,9 @@ export class SearchComponent implements OnInit {
     this.filters.page = 1;
 
     this.store.dispatch(new GetAll(this.filters));
+  }
+
+  follow(followingId: number) {
+    this.store.dispatch(new Follow(followingId));
   }
 }

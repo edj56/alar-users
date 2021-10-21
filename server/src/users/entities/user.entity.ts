@@ -1,6 +1,7 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {BeforeInsert, BeforeUpdate, Column, Entity, JoinColumn, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import { Exclude, Expose } from 'class-transformer';
+import {UserFollowerEntity} from "./user-follower.entity";
 
 @Entity({ name: 'users' })
 export class UserEntity {
@@ -38,6 +39,14 @@ export class UserEntity {
 
     @Column({ nullable: true })
     country: string;
+
+    @OneToMany(() => UserFollowerEntity, (follower) => follower.following, { eager: false })
+    @JoinColumn({ referencedColumnName: 'followingId' })
+    followings: UserFollowerEntity[];
+
+    @OneToMany(() => UserFollowerEntity, (follower) => follower.follower, { eager: false })
+    @JoinColumn({ referencedColumnName: 'followerId' })
+    followers: UserFollowerEntity[];
 
     @BeforeInsert()
     hashPassword() {
