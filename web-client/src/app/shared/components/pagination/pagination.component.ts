@@ -14,13 +14,17 @@ export class PaginationComponent implements OnChanges {
 
   pages: Array<string | number> = [];
 
+  get lastPage() {
+    return Math.ceil(this.options.total / this.options.perPage);
+  }
+
   constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.options && changes.options.currentValue) {
       this.pages = this.paginationGenerator(
         this.options.page,
-        Math.ceil(this.options.total / this.options.perPage),
+        this.lastPage,
       );
     }
   }

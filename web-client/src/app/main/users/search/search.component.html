@@ -3,8 +3,8 @@
     <input
       type="text"
       placeholder="Search..."
-      [(ngModel)]="query"
-      (ngModelChange)="onSearch($event)"
+      [(ngModel)]="filters.q"
+      (ngModelChange)="onSearch()"
     />
   </div>
 

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { GetAll, UsersStateModel } from '../users.actions';
 import { UsersState } from '../users.state';
-import {IPaginationResult} from "../../../shared/models/filter.model";
+import {IFilterOptions, IPaginationResult} from "../../../shared/models/filter.model";
 
 @Component({
   selector: 'app-search',
@@ -13,19 +13,29 @@ import {IPaginationResult} from "../../../shared/models/filter.model";
 })
 export class SearchComponent implements OnInit {
   @Select(UsersState) users$!: Observable<UsersStateModel>;
-  query: string = '';
+
+  filters: IFilterOptions = {
+    page: 1,
+    perPage: 10,
+    q: '',
+  };
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new GetAll({ page: 1, perPage: 10 }));
+    this.store.dispatch(new GetAll(this.filters));
   }
 
   onPaginate({ page, perPage }: Partial<IPaginationResult>) {
-    this.store.dispatch(new GetAll({ page: page!, perPage: perPage! }));
+    this.filters.page = page!;
+    this.filters.perPage = perPage!;
+
+    this.store.dispatch(new GetAll(this.filters));
   }
 
-  onSearch(q: string) {
-    this.store.dispatch(new GetAll({ q, page: 1, perPage: 10 }));
+  onSearch() {
+    this.filters.page = 1;
+
+    this.store.dispatch(new GetAll(this.filters));
   }
 }

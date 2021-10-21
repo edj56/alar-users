@@ -1,8 +1,25 @@
 <div>
   <button
     type="button"
+    (click)="selectPage(options.page - 1)"
+    [disabled]="options.page === 1"
+  >
+    Prev
+  </button>
+  <button
+    type="button"
     *ngFor="let page of pages"
     (click)="selectPage(page)"
     [disabled]="page === options.page || !isClickable(page)"
   >{{ page }}</button>
+
+  <button
+    type="button"
+    (click)="selectPage(options.page + 1)"
+    [disabled]="options.page === lastPage"
+  >
+    Next
+  </button>
+
+  <span>Total: {{ options.total }} rows!</span>
 </div>
